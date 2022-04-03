@@ -17,7 +17,7 @@ namespace GenshinImpactMovementSystem
 
             Input = GetComponent<PlayerInput>();
 
-            movementStateMachine = new PlayerMovementStateMachine();
+            movementStateMachine = new PlayerMovementStateMachine(this);
         }
 
         private void Start()
