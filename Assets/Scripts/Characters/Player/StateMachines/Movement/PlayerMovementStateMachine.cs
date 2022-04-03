@@ -14,11 +14,11 @@ namespace GenshinImpactMovementSystem
         {
             Player = player;
 
-            IdlingState = new PlayerIdlingState();
+            IdlingState = new PlayerIdlingState(this);
 
-            WalkingState = new PlayerWalkingState();
-            RunningState = new PlayerRunningState();
-            SprintingState = new PlayerSprintingState();
+            WalkingState = new PlayerWalkingState(this);
+            RunningState = new PlayerRunningState(this);
+            SprintingState = new PlayerSprintingState(this);
         }
     }
 }

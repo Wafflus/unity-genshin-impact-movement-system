@@ -2,6 +2,13 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerMovementState : IState
     {
+        protected PlayerMovementStateMachine stateMachine;
+
+        public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
+        {
+            stateMachine = playerMovementStateMachine;
+        }
+
         public virtual void Enter()
         {
         }
