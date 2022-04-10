@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22712
+  m_Name: pb_Mesh17812
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -700,7 +700,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22710
+  m_Name: pb_Mesh17810
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -992,7 +992,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22648
+  m_Name: pb_Mesh17748
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1156,7 +1156,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22692
+  m_Name: pb_Mesh17792
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1320,7 +1320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22668
+  m_Name: pb_Mesh17768
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1499,6 +1499,7 @@ GameObject:
   - component: {fileID: 1984851763}
   - component: {fileID: 1984851762}
   - component: {fileID: 1984851764}
+  - component: {fileID: 1984851765}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -1574,6 +1575,36 @@ MonoBehaviour:
   PlayerIndex: -1
   XYAxis: {fileID: -5630151704836100654, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &1984851765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984851761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 4194304
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 0
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &2071638696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2774,7 @@ GameObject:
   - component: {fileID: 3645893675304341656}
   - component: {fileID: 3645893675304341659}
   - component: {fileID: 3645893675304341658}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3114,7 +3145,7 @@ GameObject:
   - component: {fileID: 3645893675633586702}
   - component: {fileID: 3645893675633586697}
   - component: {fileID: 3645893675633586696}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: BigRamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3860,7 +3891,7 @@ GameObject:
   - component: {fileID: 3645893676104336798}
   - component: {fileID: 3645893676104336793}
   - component: {fileID: 3645893676104336792}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5523,7 +5554,7 @@ GameObject:
   - component: {fileID: 3645893676445261793}
   - component: {fileID: 3645893676445261792}
   - component: {fileID: 3645893676445261795}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: SmallRamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5543,7 +5574,7 @@ GameObject:
   - component: {fileID: 3645893676665001500}
   - component: {fileID: 3645893676665001503}
   - component: {fileID: 3645893676665001502}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
