@@ -1,8 +1,12 @@
+using UnityEngine;
+
 namespace GenshinImpactMovementSystem
 {
     public class PlayerMovementState : IState
     {
         protected PlayerMovementStateMachine stateMachine;
+
+        protected Vector2 movementInput;
 
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
@@ -19,6 +23,7 @@ namespace GenshinImpactMovementSystem
 
         public virtual void HandleInput()
         {
+            ReadMovementInput();
         }
 
         public virtual void Update()
@@ -27,6 +32,11 @@ namespace GenshinImpactMovementSystem
 
         public virtual void PhysicsUpdate()
         {
+        }
+
+        private void ReadMovementInput()
+        {
+            movementInput = stateMachine.Player.Input.PlayerActions.Movement.ReadValue<Vector2>();
         }
     }
 }
