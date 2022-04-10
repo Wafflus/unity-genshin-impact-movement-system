@@ -9,6 +9,8 @@ namespace GenshinImpactMovementSystem
 
         public PlayerInput Input { get; private set; }
 
+        public Transform MainCameraTransform { get; private set; }
+
         private PlayerMovementStateMachine movementStateMachine;
 
         private void Awake()
@@ -16,6 +18,8 @@ namespace GenshinImpactMovementSystem
             Rigidbody = GetComponent<Rigidbody>();
 
             Input = GetComponent<PlayerInput>();
+
+            MainCameraTransform = Camera.main.transform;
 
             movementStateMachine = new PlayerMovementStateMachine(this);
         }
