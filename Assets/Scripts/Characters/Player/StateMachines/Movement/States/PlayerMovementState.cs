@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
@@ -65,30 +64,20 @@ namespace GenshinImpactMovementSystem
 
             Vector3 movementDirection = GetMovementInputDirection();
 
+            float targetRotationYAngle = Rotate(movementDirection);
+
+            Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
+
             float movementSpeed = GetMovementSpeed();
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            stateMachine.Player.Rigidbody.AddForce(movementDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
         }
 
         protected Vector3 GetMovementInputDirection()
         {
             return new Vector3(movementInput.x, 0f, movementInput.y);
-        }
-
-        protected float GetMovementSpeed()
-        {
-            return baseMovementSpeed * speedModifier;
-        }
-
-        protected Vector3 GetPlayerHorizontalVelocity()
-        {
-            Vector3 playerHorizontalVelocity = stateMachine.Player.Rigidbody.velocity;
-
-            playerHorizontalVelocity.y = 0f;
-
-            return playerHorizontalVelocity;
         }
 
         private float Rotate(Vector3 direction)
@@ -164,6 +153,25 @@ namespace GenshinImpactMovementSystem
             Quaternion targetRotation = Quaternion.Euler(0f, smoothedYAngle, 0f);
 
             stateMachine.Player.Rigidbody.MoveRotation(targetRotation);
+        }
+
+        protected Vector3 GetTargetRotationDirection(float targetRotationAngle)
+        {
+            return Quaternion.Euler(0f, targetRotationAngle, 0f) * Vector3.forward;
+        }
+
+        protected float GetMovementSpeed()
+        {
+            return baseMovementSpeed * speedModifier;
+        }
+
+        protected Vector3 GetPlayerHorizontalVelocity()
+        {
+            Vector3 playerHorizontalVelocity = stateMachine.Player.Rigidbody.velocity;
+
+            playerHorizontalVelocity.y = 0f;
+
+            return playerHorizontalVelocity;
         }
     }
 }
