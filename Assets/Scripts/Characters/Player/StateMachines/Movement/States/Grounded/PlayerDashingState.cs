@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
 {
@@ -23,6 +24,18 @@ namespace GenshinImpactMovementSystem
             UpdateConsecutiveDashes();
 
             startTime = Time.time;
+        }
+
+        public override void OnAnimationTransitionEvent()
+        {
+            if (stateMachine.ReusableData.MovementInput == Vector2.zero)
+            {
+                stateMachine.ChangeState(stateMachine.IdlingState);
+
+                return;
+            }
+
+            stateMachine.ChangeState(stateMachine.SprintingState);
         }
 
         private void Dash()
@@ -59,6 +72,14 @@ namespace GenshinImpactMovementSystem
         private bool IsConsecutive()
         {
             return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
+        }
+
+        protected override void OnMovementCanceled(InputAction.CallbackContext context)
+        {
+        }
+
+        protected override void OnDashStarted(InputAction.CallbackContext context)
+        {
         }
     }
 }
