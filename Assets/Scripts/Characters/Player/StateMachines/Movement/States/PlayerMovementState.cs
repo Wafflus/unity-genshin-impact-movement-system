@@ -47,6 +47,18 @@ namespace GenshinImpactMovementSystem
             Move();
         }
 
+        public virtual void OnAnimationEnterEvent()
+        {
+        }
+
+        public virtual void OnAnimationExitEvent()
+        {
+        }
+
+        public virtual void OnAnimationTransitionEvent()
+        {
+        }
+
         protected virtual void AddInputActionsCallbacks()
         {
             stateMachine.Player.Input.PlayerActions.WalkToggle.started += OnWalkToggleStarted;
