@@ -64,6 +64,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": ""Clamp(min=-0.1,max=0.1),Invert"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a08fe1b-9bf9-4d09-b4c2-6df4d4fa3fff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,28 @@ namespace GenshinImpactMovementSystem
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71c1f680-d733-447c-b2ee-a095148f37b8"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf8eb5b9-3f0a-4403-9480-e6090982ca30"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -166,6 +197,7 @@ namespace GenshinImpactMovementSystem
             m_Player_WalkToggle = m_Player.FindAction("WalkToggle", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+            m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -229,6 +261,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_WalkToggle;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Zoom;
+        private readonly InputAction m_Player_Dash;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -237,6 +270,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @WalkToggle => m_Wrapper.m_Player_WalkToggle;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+            public InputAction @Dash => m_Wrapper.m_Player_Dash;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -258,6 +292,9 @@ namespace GenshinImpactMovementSystem
                     @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                     @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                     @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                    @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -274,6 +311,9 @@ namespace GenshinImpactMovementSystem
                     @Zoom.started += instance.OnZoom;
                     @Zoom.performed += instance.OnZoom;
                     @Zoom.canceled += instance.OnZoom;
+                    @Dash.started += instance.OnDash;
+                    @Dash.performed += instance.OnDash;
+                    @Dash.canceled += instance.OnDash;
                 }
             }
         }
@@ -284,6 +324,7 @@ namespace GenshinImpactMovementSystem
             void OnWalkToggle(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
+            void OnDash(InputAction.CallbackContext context);
         }
     }
 }
