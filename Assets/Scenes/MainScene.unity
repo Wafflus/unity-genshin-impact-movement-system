@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17812
+  m_Name: pb_Mesh17844
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -536,7 +536,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17784
+  m_Name: pb_Mesh17816
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -700,7 +700,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17810
+  m_Name: pb_Mesh17842
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -992,7 +992,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17748
+  m_Name: pb_Mesh17780
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1156,7 +1156,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17792
+  m_Name: pb_Mesh17824
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1320,7 +1320,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17768
+  m_Name: pb_Mesh17800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2688,6 +2688,7 @@ GameObject:
   - component: {fileID: 3534022779996282020}
   - component: {fileID: 3534022779996282018}
   - component: {fileID: 3534022779996282019}
+  - component: {fileID: 3534022779996282022}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2747,9 +2748,27 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1.8
+  m_Height: 1.3499999
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 1.125, z: 0}
+--- !u!114 &3534022779996282022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534022779996282017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd271fa30d98da4395e9ada13d1a649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DefaultColliderData>k__BackingField:
+    <Height>k__BackingField: 1.8
+    <CenterY>k__BackingField: 0.9
+    <Radius>k__BackingField: 0.2
+  <SlopeData>k__BackingField:
+    <StepHeightPercentage>k__BackingField: 0.25
 --- !u!1 &3543149763464128111
 GameObject:
   m_ObjectHideFlags: 0
