@@ -2709,6 +2709,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 8abb7b47fbbb7ff499b61b49c7131b51, type: 2}
+  <LayerData>k__BackingField:
+    <GroundLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4194304
 --- !u!114 &3534022779996282019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2769,6 +2773,7 @@ MonoBehaviour:
     <Radius>k__BackingField: 0.2
   <SlopeData>k__BackingField:
     <StepHeightPercentage>k__BackingField: 0.25
+    <FloatRayDistance>k__BackingField: 2
 --- !u!1 &3543149763464128111
 GameObject:
   m_ObjectHideFlags: 0
