@@ -3,6 +3,7 @@ using UnityEngine;
 namespace GenshinImpactMovementSystem
 {
     [RequireComponent(typeof(PlayerInput))]
+    [RequireComponent(typeof(ResizableCapsuleCollider))]
     public class Player : MonoBehaviour
     {
         [field: Header("References")]
@@ -11,6 +12,7 @@ namespace GenshinImpactMovementSystem
         public Rigidbody Rigidbody { get; private set; }
 
         public PlayerInput Input { get; private set; }
+        public ResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 
         public Transform MainCameraTransform { get; private set; }
 
@@ -21,6 +23,7 @@ namespace GenshinImpactMovementSystem
             Rigidbody = GetComponent<Rigidbody>();
 
             Input = GetComponent<PlayerInput>();
+            ResizableCapsuleCollider = GetComponent<ResizableCapsuleCollider>();
 
             MainCameraTransform = Camera.main.transform;
 
