@@ -2774,6 +2774,7 @@ MonoBehaviour:
   <SlopeData>k__BackingField:
     <StepHeightPercentage>k__BackingField: 0.25
     <FloatRayDistance>k__BackingField: 2
+    <StepReachForce>k__BackingField: 25
 --- !u!1 &3543149763464128111
 GameObject:
   m_ObjectHideFlags: 0
