@@ -186,6 +186,11 @@ namespace GenshinImpactMovementSystem
             return playerHorizontalVelocity;
         }
 
+        protected Vector3 GetPlayerVerticalVelocity()
+        {
+            return new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
+        }
+
         protected void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
