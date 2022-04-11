@@ -173,5 +173,10 @@ namespace GenshinImpactMovementSystem
 
             return playerHorizontalVelocity;
         }
+
+        protected void ResetVelocity()
+        {
+            stateMachine.Player.Rigidbody.velocity = Vector3.zero;
+        }
     }
 }
