@@ -28,17 +28,5 @@ namespace GenshinImpactMovementSystem
 
             OnMove();
         }
-
-        private void OnMove()
-        {
-            if (shouldWalk)
-            {
-                stateMachine.ChangeState(stateMachine.WalkingState);
-
-                return;
-            }
-
-            stateMachine.ChangeState(stateMachine.RunningState);
-        }
     }
 }
