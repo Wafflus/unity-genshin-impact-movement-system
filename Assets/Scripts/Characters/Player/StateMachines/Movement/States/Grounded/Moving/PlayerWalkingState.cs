@@ -4,15 +4,18 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerWalkingState : PlayerGroundedState
     {
+        private readonly PlayerWalkData walkData;
+
         public PlayerWalkingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
+            walkData = groundedData.WalkData;
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            speedModifier = 0.225f;
+            stateMachine.ReusableData.MovementSpeedModifier = walkData.SpeedModifier;
         }
 
         protected override void OnWalkToggleStarted(InputAction.CallbackContext context)
