@@ -17,6 +17,6 @@ MonoBehaviour:
     <BaseRotationData>k__BackingField:
       <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.14, z: 0}
     <WalkData>k__BackingField:
-      <SpeedModifier>k__BackingField: 0
+      <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
-      <SpeedModifier>k__BackingField: 0
+      <SpeedModifier>k__BackingField: 1
