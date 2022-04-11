@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
 {
@@ -16,6 +18,8 @@ namespace GenshinImpactMovementSystem
         protected Vector3 dampedTargetRotationCurrentVelocity;
         protected Vector3 dampedTargetRotationPassedTime;
 
+        protected bool shouldWalk;
+
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
             stateMachine = playerMovementStateMachine;
@@ -30,10 +34,12 @@ namespace GenshinImpactMovementSystem
 
         public virtual void Enter()
         {
+            AddInputActionsCallbacks();
         }
 
         public virtual void Exit()
         {
+            RemoveInputActionsCallbacks();
         }
 
         public virtual void HandleInput()
@@ -48,6 +54,21 @@ namespace GenshinImpactMovementSystem
         public virtual void PhysicsUpdate()
         {
             Move();
+        }
+
+        protected virtual void AddInputActionsCallbacks()
+        {
+            stateMachine.Player.Input.PlayerActions.WalkToggle.started += OnWalkToggleStarted;
+        }
+
+        protected virtual void RemoveInputActionsCallbacks()
+        {
+            stateMachine.Player.Input.PlayerActions.WalkToggle.started -= OnWalkToggleStarted;
+        }
+
+        private void OnWalkToggleStarted(InputAction.CallbackContext context)
+        {
+            shouldWalk = !shouldWalk;
         }
 
         private void ReadMovementInput()
