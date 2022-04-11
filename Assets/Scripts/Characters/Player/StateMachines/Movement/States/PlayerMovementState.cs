@@ -66,7 +66,7 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.WalkToggle.started -= OnWalkToggleStarted;
         }
 
-        private void OnWalkToggleStarted(InputAction.CallbackContext context)
+        protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
         {
             shouldWalk = !shouldWalk;
         }
