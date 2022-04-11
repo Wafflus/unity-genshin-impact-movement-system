@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +25,15 @@ namespace GenshinImpactMovementSystem
 
             if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, stateMachine.Player.ResizableCapsuleCollider.SlopeData.FloatRayDistance, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
             {
+                float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
+
+                float slopeSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
+
+                if (slopeSpeedModifier == 0f)
+                {
+                    return;
+                }
+
                 float distanceToFloatingPoint = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine.Player.transform.localScale.y - hit.distance;
 
                 if (distanceToFloatingPoint == 0f)
@@ -37,6 +47,15 @@ namespace GenshinImpactMovementSystem
 
                 stateMachine.Player.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
             }
+        }
+
+        private float SetSlopeSpeedModifierOnAngle(float angle)
+        {
+            float slopeSpeedModifier = groundedData.SlopeSpeedAngles.Evaluate(angle);
+
+            stateMachine.ReusableData.MovementOnSlopesSpeedModifier = slopeSpeedModifier;
+
+            return slopeSpeedModifier;
         }
 
         protected override void AddInputActionsCallbacks()
