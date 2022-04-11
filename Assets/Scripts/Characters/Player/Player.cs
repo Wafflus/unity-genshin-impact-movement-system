@@ -9,6 +9,9 @@ namespace GenshinImpactMovementSystem
         [field: Header("References")]
         [field: SerializeField] public PlayerSO Data { get; private set; }
 
+        [field: Header("Collisions")]
+        [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+
         public Rigidbody Rigidbody { get; private set; }
 
         public PlayerInput Input { get; private set; }
