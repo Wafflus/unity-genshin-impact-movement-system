@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
 {
-    public class PlayerRunningState : PlayerMovementState
+    public class PlayerRunningState : PlayerGroundedState
     {
         public PlayerRunningState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {

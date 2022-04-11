@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GenshinImpactMovementSystem
 {
-    public class PlayerIdlingState : PlayerMovementState
+    public class PlayerIdlingState : PlayerGroundedState
     {
         public PlayerIdlingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
