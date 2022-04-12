@@ -98,5 +98,9 @@ namespace GenshinImpactMovementSystem
 
             return jumpForce;
         }
+
+        protected override void ResetSprintState()
+        {
+        }
     }
 }

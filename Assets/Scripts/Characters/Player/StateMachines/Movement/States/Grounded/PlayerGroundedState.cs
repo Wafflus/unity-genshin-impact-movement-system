@@ -9,11 +9,33 @@ namespace GenshinImpactMovementSystem
         {
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+
+            UpdateShouldSprintState();
+        }
+
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
 
             Float();
+        }
+
+        private void UpdateShouldSprintState()
+        {
+            if (!stateMachine.ReusableData.ShouldSprint)
+            {
+                return;
+            }
+
+            if (stateMachine.ReusableData.MovementInput != Vector2.zero)
+            {
+                return;
+            }
+
+            stateMachine.ReusableData.ShouldSprint = false;
         }
 
         private void Float()
@@ -96,6 +118,13 @@ namespace GenshinImpactMovementSystem
 
         protected virtual void OnMove()
         {
+            if (stateMachine.ReusableData.ShouldSprint)
+            {
+                stateMachine.ChangeState(stateMachine.SprintingState);
+
+                return;
+            }
+
             if (stateMachine.ReusableData.ShouldWalk)
             {
                 stateMachine.ChangeState(stateMachine.WalkingState);

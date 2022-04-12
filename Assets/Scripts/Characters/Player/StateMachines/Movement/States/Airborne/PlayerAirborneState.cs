@@ -6,6 +6,18 @@ namespace GenshinImpactMovementSystem
         {
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+
+            ResetSprintState();
+        }
+
+        protected virtual void ResetSprintState()
+        {
+            stateMachine.ReusableData.ShouldSprint = false;
+        }
+
         protected override void OnContactWithGround()
         {
             stateMachine.ChangeState(stateMachine.IdlingState);
