@@ -100,5 +100,12 @@ namespace GenshinImpactMovementSystem
 
             base.OnJumpStarted(context);
         }
+
+        protected override void OnFall()
+        {
+            shouldResetSprintState = false;
+
+            base.OnFall();
+        }
     }
 }
