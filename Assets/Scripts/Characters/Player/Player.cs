@@ -19,6 +19,7 @@ namespace GenshinImpactMovementSystem
         [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
 
         public Rigidbody Rigidbody { get; private set; }
+        public Animator Animator { get; private set; }
 
         public PlayerInput Input { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
@@ -33,6 +34,7 @@ namespace GenshinImpactMovementSystem
             AnimationData.Initialize();
 
             Rigidbody = GetComponent<Rigidbody>();
+            Animator = GetComponentInChildren<Animator>();
 
             Input = GetComponent<PlayerInput>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
