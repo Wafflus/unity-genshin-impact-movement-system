@@ -1,5 +1,3 @@
-using UnityEngine.InputSystem;
-
 namespace GenshinImpactMovementSystem
 {
     public class PlayerLandingState : PlayerGroundedState
@@ -8,8 +6,11 @@ namespace GenshinImpactMovementSystem
         {
         }
 
-        protected override void OnMovementCanceled(InputAction.CallbackContext context)
+        public override void Enter()
         {
+            base.Enter();
+
+            DisableCameraRecentering();
         }
     }
 }
