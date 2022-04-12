@@ -207,5 +207,21 @@ namespace GenshinImpactMovementSystem
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
         }
+
+        protected void DecelerateHorizontally()
+        {
+            Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
+
+            stateMachine.Player.Rigidbody.AddForce(-playerHorizontalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
+        }
+
+        protected bool IsMovingHorizontally(float minimumMagnitude = 0.1f)
+        {
+            Vector3 playerHorizontaVelocity = GetPlayerHorizontalVelocity();
+
+            Vector2 playerHorizontalMovement = new Vector2(playerHorizontaVelocity.x, playerHorizontaVelocity.z);
+
+            return playerHorizontalMovement.magnitude > minimumMagnitude;
+        }
     }
 }
