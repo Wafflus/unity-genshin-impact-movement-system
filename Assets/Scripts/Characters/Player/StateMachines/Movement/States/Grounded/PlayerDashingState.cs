@@ -81,8 +81,10 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Movement.performed -= OnMovementPerformed;
         }
 
-        private void OnMovementPerformed(InputAction.CallbackContext context)
+        protected override void OnMovementPerformed(InputAction.CallbackContext context)
         {
+            base.OnMovementPerformed(context);
+
             shouldKeepRotating = true;
         }
 
