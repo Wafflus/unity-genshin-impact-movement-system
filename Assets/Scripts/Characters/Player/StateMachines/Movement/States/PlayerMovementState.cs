@@ -247,9 +247,16 @@ namespace GenshinImpactMovementSystem
             return Quaternion.Euler(0f, targetRotationAngle, 0f) * Vector3.forward;
         }
 
-        protected float GetMovementSpeed()
+        protected float GetMovementSpeed(bool shouldConsiderSlopes = true)
         {
-            return groundedData.BaseSpeed * stateMachine.ReusableData.MovementSpeedModifier * stateMachine.ReusableData.MovementOnSlopesSpeedModifier;
+            float movementSpeed = groundedData.BaseSpeed * stateMachine.ReusableData.MovementSpeedModifier;
+
+            if (shouldConsiderSlopes)
+            {
+                movementSpeed *= stateMachine.ReusableData.MovementOnSlopesSpeedModifier;
+            }
+
+            return movementSpeed;
         }
 
         protected Vector3 GetPlayerHorizontalVelocity()

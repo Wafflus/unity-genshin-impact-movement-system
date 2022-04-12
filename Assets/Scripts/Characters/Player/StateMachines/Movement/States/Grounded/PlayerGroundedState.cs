@@ -165,5 +165,12 @@ namespace GenshinImpactMovementSystem
         {
             stateMachine.ChangeState(stateMachine.FallingState);
         }
+
+        protected override void OnMovementPerformed(InputAction.CallbackContext context)
+        {
+            base.OnMovementPerformed(context);
+
+            UpdateTargetRotation(stateMachine.ReusableData.MovementInput);
+        }
     }
 }

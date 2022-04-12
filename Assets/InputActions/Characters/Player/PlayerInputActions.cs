@@ -91,6 +91,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CursorToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2ac7a91-4e51-40b5-bfe4-735e5216687f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ namespace GenshinImpactMovementSystem
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7476a130-e887-4a70-8ece-5094a7605971"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CursorToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -251,6 +271,7 @@ namespace GenshinImpactMovementSystem
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_CursorToggle = m_Player.FindAction("CursorToggle", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -317,6 +338,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_Dash;
         private readonly InputAction m_Player_Sprint;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_CursorToggle;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -328,6 +350,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @CursorToggle => m_Wrapper.m_Player_CursorToggle;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -358,6 +381,9 @@ namespace GenshinImpactMovementSystem
                     @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @CursorToggle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCursorToggle;
+                    @CursorToggle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCursorToggle;
+                    @CursorToggle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCursorToggle;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -383,6 +409,9 @@ namespace GenshinImpactMovementSystem
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @CursorToggle.started += instance.OnCursorToggle;
+                    @CursorToggle.performed += instance.OnCursorToggle;
+                    @CursorToggle.canceled += instance.OnCursorToggle;
                 }
             }
         }
@@ -396,6 +425,7 @@ namespace GenshinImpactMovementSystem
             void OnDash(InputAction.CallbackContext context);
             void OnSprint(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnCursorToggle(InputAction.CallbackContext context);
         }
     }
 }
