@@ -5,5 +5,12 @@ namespace GenshinImpactMovementSystem
         public PlayerHardStoppingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
+
+        public override void Enter()
+        {
+            base.Enter();
+
+            stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
+        }
     }
 }
