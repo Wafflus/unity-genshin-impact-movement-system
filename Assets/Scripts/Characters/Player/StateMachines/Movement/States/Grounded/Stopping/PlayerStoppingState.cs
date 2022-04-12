@@ -12,6 +12,8 @@ namespace GenshinImpactMovementSystem
         {
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
 
+            SetBaseCameraRecenteringData();
+
             base.Enter();
         }
 

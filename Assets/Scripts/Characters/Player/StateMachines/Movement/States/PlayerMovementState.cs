@@ -23,7 +23,15 @@ namespace GenshinImpactMovementSystem
 
         private void InitializeData()
         {
+            SetBaseCameraRecenteringData();
+
             SetBaseRotationData();
+        }
+
+        protected void SetBaseCameraRecenteringData()
+        {
+            stateMachine.ReusableData.SidewaysCameraRecenteringData = groundedData.SidewaysCameraRecenteringData;
+            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
         }
 
         protected void SetBaseRotationData()
@@ -291,12 +299,12 @@ namespace GenshinImpactMovementSystem
 
             if (movementInput == Vector2.down)
             {
-                SetCameraRecenteringState(cameraVerticalAngle, groundedData.BackwardsCameraRecenteringData);
+                SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.BackwardsCameraRecenteringData);
 
                 return;
             }
 
-            SetCameraRecenteringState(cameraVerticalAngle, groundedData.SidewaysCameraRecenteringData);
+            SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.SidewaysCameraRecenteringData);
         }
 
         protected void SetCameraRecenteringState(float cameraVerticalAngle, List<PlayerCameraRecenteringData> cameraRecenteringData)
