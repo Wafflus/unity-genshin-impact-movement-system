@@ -67,6 +67,10 @@ namespace GenshinImpactMovementSystem
             }
         }
 
+        public virtual void OnTriggerExit(Collider collider)
+        {
+        }
+
         public virtual void OnAnimationEnterEvent()
         {
         }
