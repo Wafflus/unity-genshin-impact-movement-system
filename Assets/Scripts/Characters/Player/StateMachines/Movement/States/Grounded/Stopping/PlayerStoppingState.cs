@@ -10,9 +10,9 @@ namespace GenshinImpactMovementSystem
 
         public override void Enter()
         {
-            base.Enter();
-
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
+
+            base.Enter();
         }
 
         public override void PhysicsUpdate()

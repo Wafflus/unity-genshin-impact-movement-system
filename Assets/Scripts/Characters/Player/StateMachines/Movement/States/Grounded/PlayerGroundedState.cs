@@ -14,6 +14,8 @@ namespace GenshinImpactMovementSystem
             base.Enter();
 
             UpdateShouldSprintState();
+
+            UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
         }
 
         public override void PhysicsUpdate()
