@@ -5,6 +5,7 @@ namespace GenshinImpactMovementSystem
     public class PlayerJumpingState : PlayerAirborneState
     {
         private bool shouldKeepRotating;
+        private bool canStartFalling;
 
         public PlayerJumpingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
@@ -30,6 +31,25 @@ namespace GenshinImpactMovementSystem
             base.Exit();
 
             SetBaseRotationData();
+
+            canStartFalling = false;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (!canStartFalling && IsMovingUp(0f))
+            {
+                canStartFalling = true;
+            }
+
+            if (!canStartFalling || IsMovingUp(0f))
+            {
+                return;
+            }
+
+            stateMachine.ChangeState(stateMachine.FallingState);
         }
 
         public override void PhysicsUpdate()

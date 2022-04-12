@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -61,7 +60,17 @@ namespace GenshinImpactMovementSystem
         {
             if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
             {
-                OnContactWithGround();
+                OnContactWithGround(collider);
+
+                return;
+            }
+        }
+
+        public virtual void OnTriggerExit(Collider collider)
+        {
+            if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
+            {
+                OnContactWithGroundExited(collider);
 
                 return;
             }
@@ -223,13 +232,24 @@ namespace GenshinImpactMovementSystem
             return new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
         }
 
-        protected virtual void OnContactWithGround()
+        protected virtual void OnContactWithGround(Collider collider)
+        {
+        }
+
+        protected virtual void OnContactWithGroundExited(Collider collider)
         {
         }
 
         protected void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
+        }
+
+        protected void ResetVerticalVelocity()
+        {
+            Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
+
+            stateMachine.Player.Rigidbody.velocity = playerHorizontalVelocity;
         }
 
         protected void DecelerateHorizontally()

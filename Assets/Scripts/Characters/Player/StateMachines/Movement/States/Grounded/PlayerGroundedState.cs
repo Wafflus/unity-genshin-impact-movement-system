@@ -134,5 +134,38 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ChangeState(stateMachine.RunningState);
         }
+
+        protected override void OnContactWithGroundExited(Collider collider)
+        {
+            if (IsThereGroundUnderneath())
+            {
+                return;
+            }
+
+            Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
+
+            Ray downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.ColliderVerticalExtents, Vector3.down);
+
+            if (!Physics.Raycast(downwardsRayFromCapsuleBottom, out _, groundedData.GroundToFallRayDistance, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+            {
+                OnFall();
+            }
+        }
+
+        private bool IsThereGroundUnderneath()
+        {
+            PlayerTriggerColliderData triggerColliderData = stateMachine.Player.ResizableCapsuleCollider.TriggerColliderData;
+
+            Vector3 groundColliderCenterInWorldSpace = triggerColliderData.GroundCheckCollider.bounds.center;
+
+            Collider[] overlappedGroundColliders = Physics.OverlapBox(groundColliderCenterInWorldSpace, triggerColliderData.GroundCheckColliderVerticalExtents, triggerColliderData.GroundCheckCollider.transform.rotation, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore);
+
+            return overlappedGroundColliders.Length > 0;
+        }
+
+        protected virtual void OnFall()
+        {
+            stateMachine.ChangeState(stateMachine.FallingState);
+        }
     }
 }
