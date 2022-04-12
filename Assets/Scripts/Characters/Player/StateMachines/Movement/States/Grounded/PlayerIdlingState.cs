@@ -10,9 +10,11 @@ namespace GenshinImpactMovementSystem
 
         public override void Enter()
         {
-            base.Enter();
-
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
+
+            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.IdleData.BackwardsCameraRecenteringData;
+
+            base.Enter();
 
             stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StationaryForce;
 

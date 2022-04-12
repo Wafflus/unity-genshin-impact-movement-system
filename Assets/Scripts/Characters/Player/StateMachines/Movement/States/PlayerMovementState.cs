@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,15 @@ namespace GenshinImpactMovementSystem
 
         private void InitializeData()
         {
+            SetBaseCameraRecenteringData();
+
             SetBaseRotationData();
+        }
+
+        protected void SetBaseCameraRecenteringData()
+        {
+            stateMachine.ReusableData.SidewaysCameraRecenteringData = groundedData.SidewaysCameraRecenteringData;
+            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
         }
 
         protected void SetBaseRotationData()
@@ -91,16 +100,41 @@ namespace GenshinImpactMovementSystem
         protected virtual void AddInputActionsCallbacks()
         {
             stateMachine.Player.Input.PlayerActions.WalkToggle.started += OnWalkToggleStarted;
+
+            stateMachine.Player.Input.PlayerActions.Look.started += OnMouseMovementStarted;
+
+            stateMachine.Player.Input.PlayerActions.Movement.performed += OnMovementPerformed;
+            stateMachine.Player.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
         }
 
         protected virtual void RemoveInputActionsCallbacks()
         {
             stateMachine.Player.Input.PlayerActions.WalkToggle.started -= OnWalkToggleStarted;
+
+            stateMachine.Player.Input.PlayerActions.Look.started -= OnMouseMovementStarted;
+
+            stateMachine.Player.Input.PlayerActions.Movement.performed -= OnMovementPerformed;
+            stateMachine.Player.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
         }
 
         protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
         {
             stateMachine.ReusableData.ShouldWalk = !stateMachine.ReusableData.ShouldWalk;
+        }
+
+        private void OnMouseMovementStarted(InputAction.CallbackContext context)
+        {
+            UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
+        }
+
+        protected virtual void OnMovementPerformed(InputAction.CallbackContext context)
+        {
+            UpdateCameraRecenteringState(context.ReadValue<Vector2>());
+        }
+
+        protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
+        {
+            DisableCameraRecentering();
         }
 
         private void ReadMovementInput()
@@ -238,6 +272,73 @@ namespace GenshinImpactMovementSystem
 
         protected virtual void OnContactWithGroundExited(Collider collider)
         {
+        }
+
+        protected void UpdateCameraRecenteringState(Vector2 movementInput)
+        {
+            if (movementInput == Vector2.zero)
+            {
+                return;
+            }
+
+            if (movementInput == Vector2.up)
+            {
+                DisableCameraRecentering();
+
+                return;
+            }
+
+            float cameraVerticalAngle = stateMachine.Player.MainCameraTransform.eulerAngles.x;
+
+            if (cameraVerticalAngle >= 270f)
+            {
+                cameraVerticalAngle -= 360f;
+            }
+
+            cameraVerticalAngle = Mathf.Abs(cameraVerticalAngle);
+
+            if (movementInput == Vector2.down)
+            {
+                SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.BackwardsCameraRecenteringData);
+
+                return;
+            }
+
+            SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.SidewaysCameraRecenteringData);
+        }
+
+        protected void SetCameraRecenteringState(float cameraVerticalAngle, List<PlayerCameraRecenteringData> cameraRecenteringData)
+        {
+            foreach (PlayerCameraRecenteringData recenteringData in cameraRecenteringData)
+            {
+                if (!recenteringData.IsWithinRange(cameraVerticalAngle))
+                {
+                    continue;
+                }
+
+                EnableCameraRecentering(recenteringData.WaitTime, recenteringData.RecenteringTime);
+
+                return;
+            }
+
+            DisableCameraRecentering();
+        }
+
+        protected void EnableCameraRecentering(float waitTime = -1f, float recenteringTime = -1f)
+        {
+            float movementSpeed = GetMovementSpeed();
+
+            if (movementSpeed == 0f)
+            {
+                movementSpeed = groundedData.BaseSpeed;
+            }
+
+            stateMachine.Player.CameraRecenteringUtility.EnableRecentering(waitTime, recenteringTime, groundedData.BaseSpeed, movementSpeed);
+        }
+
+        protected void DisableCameraRecentering()
+        {
+            stateMachine.Player.CameraRecenteringUtility.DisableRecentering();
         }
 
         protected void ResetVelocity()

@@ -10,11 +10,20 @@ namespace GenshinImpactMovementSystem
 
         public override void Enter()
         {
-            base.Enter();
-
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
 
+            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.WalkData.BackwardsCameraRecenteringData;
+
+            base.Enter();
+
             stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.WeakForce;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            SetBaseCameraRecenteringData();
         }
 
         protected override void OnWalkToggleStarted(InputAction.CallbackContext context)
@@ -27,6 +36,8 @@ namespace GenshinImpactMovementSystem
         protected override void OnMovementCanceled(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.LightStoppingState);
+
+            base.OnMovementCanceled(context);
         }
     }
 }

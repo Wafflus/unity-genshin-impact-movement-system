@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,9 +17,9 @@ namespace GenshinImpactMovementSystem
 
         public override void Enter()
         {
-            base.Enter();
-
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.DashData.SpeedModifier;
+
+            base.Enter();
 
             stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
 
@@ -81,8 +80,10 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Movement.performed -= OnMovementPerformed;
         }
 
-        private void OnMovementPerformed(InputAction.CallbackContext context)
+        protected override void OnMovementPerformed(InputAction.CallbackContext context)
         {
+            base.OnMovementPerformed(context);
+
             shouldKeepRotating = true;
         }
 
@@ -124,10 +125,6 @@ namespace GenshinImpactMovementSystem
         private bool IsConsecutive()
         {
             return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
-        }
-
-        protected override void OnMovementCanceled(InputAction.CallbackContext context)
-        {
         }
 
         protected override void OnDashStarted(InputAction.CallbackContext context)

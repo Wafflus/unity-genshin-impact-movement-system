@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
 {
@@ -120,6 +121,10 @@ namespace GenshinImpactMovementSystem
         }
 
         protected override void ResetSprintState()
+        {
+        }
+
+        protected override void OnMovementCanceled(InputAction.CallbackContext context)
         {
         }
     }
