@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,12 +9,14 @@ namespace GenshinImpactMovementSystem
         protected PlayerMovementStateMachine stateMachine;
 
         protected readonly PlayerGroundedData groundedData;
+        protected readonly PlayerAirborneData airborneData;
 
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
             stateMachine = playerMovementStateMachine;
 
             groundedData = stateMachine.Player.Data.GroundedData;
+            airborneData = stateMachine.Player.Data.AirborneData;
 
             InitializeData();
         }
@@ -52,6 +55,16 @@ namespace GenshinImpactMovementSystem
         public virtual void PhysicsUpdate()
         {
             Move();
+        }
+
+        public virtual void OnTriggerEnter(Collider collider)
+        {
+            if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
+            {
+                OnContactWithGround();
+
+                return;
+            }
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -210,6 +223,10 @@ namespace GenshinImpactMovementSystem
             return new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
         }
 
+        protected virtual void OnContactWithGround()
+        {
+        }
+
         protected void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
@@ -222,6 +239,13 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Rigidbody.AddForce(-playerHorizontalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
         }
 
+        protected void DecelerateVertically()
+        {
+            Vector3 playerVerticalVelocity = GetPlayerVerticalVelocity();
+
+            stateMachine.Player.Rigidbody.AddForce(-playerVerticalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
+        }
+
         protected bool IsMovingHorizontally(float minimumMagnitude = 0.1f)
         {
             Vector3 playerHorizontaVelocity = GetPlayerHorizontalVelocity();
@@ -229,6 +253,16 @@ namespace GenshinImpactMovementSystem
             Vector2 playerHorizontalMovement = new Vector2(playerHorizontaVelocity.x, playerHorizontaVelocity.z);
 
             return playerHorizontalMovement.magnitude > minimumMagnitude;
+        }
+
+        protected bool IsMovingUp(float minimumVelocity = 0.1f)
+        {
+            return GetPlayerVerticalVelocity().y > minimumVelocity;
+        }
+
+        protected bool IsMovingDown(float minimumVelocity = 0.1f)
+        {
+            return GetPlayerVerticalVelocity().y < -minimumVelocity;
         }
     }
 }

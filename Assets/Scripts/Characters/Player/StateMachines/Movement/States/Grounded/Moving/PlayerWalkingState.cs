@@ -13,6 +13,8 @@ namespace GenshinImpactMovementSystem
             base.Enter();
 
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
+
+            stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.WeakForce;
         }
 
         protected override void OnWalkToggleStarted(InputAction.CallbackContext context)

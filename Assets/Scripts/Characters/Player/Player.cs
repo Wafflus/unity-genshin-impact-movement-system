@@ -49,5 +49,10 @@ namespace GenshinImpactMovementSystem
         {
             movementStateMachine.PhysicsUpdate();
         }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            movementStateMachine.OnTriggerEnter(collider);
+        }
     }
 }

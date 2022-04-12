@@ -11,6 +11,8 @@ namespace GenshinImpactMovementSystem
             base.Enter();
 
             stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
+
+            stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
         }
 
         protected override void OnMove()
