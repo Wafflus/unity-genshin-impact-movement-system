@@ -20,6 +20,8 @@ namespace GenshinImpactMovementSystem
 
             base.Enter();
 
+            StartAnimation(stateMachine.Player.AnimationData.SprintParameterHash);
+
             stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
 
             startTime = Time.time;
@@ -30,6 +32,8 @@ namespace GenshinImpactMovementSystem
         public override void Exit()
         {
             base.Exit();
+
+            StopAnimation(stateMachine.Player.AnimationData.SprintParameterHash);
 
             if (shouldResetSprintState)
             {

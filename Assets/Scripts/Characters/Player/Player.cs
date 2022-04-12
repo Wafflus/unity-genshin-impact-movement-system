@@ -15,7 +15,11 @@ namespace GenshinImpactMovementSystem
         [field: Header("Camera")]
         [field: SerializeField] public PlayerCameraRecenteringUtility CameraRecenteringUtility { get; private set; }
 
+        [field: Header("Animations")]
+        [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
+
         public Rigidbody Rigidbody { get; private set; }
+        public Animator Animator { get; private set; }
 
         public PlayerInput Input { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
@@ -27,8 +31,10 @@ namespace GenshinImpactMovementSystem
         private void Awake()
         {
             CameraRecenteringUtility.Initialize();
+            AnimationData.Initialize();
 
             Rigidbody = GetComponent<Rigidbody>();
+            Animator = GetComponentInChildren<Animator>();
 
             Input = GetComponent<PlayerInput>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
@@ -63,6 +69,21 @@ namespace GenshinImpactMovementSystem
         private void OnTriggerExit(Collider collider)
         {
             movementStateMachine.OnTriggerExit(collider);
+        }
+
+        public void OnMovementStateAnimationEnterEvent()
+        {
+            movementStateMachine.OnAnimationEnterEvent();
+        }
+
+        public void OnMovementStateAnimationExitEvent()
+        {
+            movementStateMachine.OnAnimationExitEvent();
+        }
+
+        public void OnMovementStateAnimationTransitionEvent()
+        {
+            movementStateMachine.OnAnimationTransitionEvent();
         }
     }
 }

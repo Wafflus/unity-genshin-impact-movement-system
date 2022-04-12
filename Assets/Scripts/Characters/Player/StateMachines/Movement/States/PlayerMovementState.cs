@@ -21,26 +21,6 @@ namespace GenshinImpactMovementSystem
             InitializeData();
         }
 
-        private void InitializeData()
-        {
-            SetBaseCameraRecenteringData();
-
-            SetBaseRotationData();
-        }
-
-        protected void SetBaseCameraRecenteringData()
-        {
-            stateMachine.ReusableData.SidewaysCameraRecenteringData = groundedData.SidewaysCameraRecenteringData;
-            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
-        }
-
-        protected void SetBaseRotationData()
-        {
-            stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
-
-            stateMachine.ReusableData.TimeToReachTargetRotation = stateMachine.ReusableData.RotationData.TargetRotationReachTime;
-        }
-
         public virtual void Enter()
         {
             AddInputActionsCallbacks();
@@ -95,6 +75,36 @@ namespace GenshinImpactMovementSystem
 
         public virtual void OnAnimationTransitionEvent()
         {
+        }
+
+        private void InitializeData()
+        {
+            SetBaseCameraRecenteringData();
+
+            SetBaseRotationData();
+        }
+
+        protected void SetBaseCameraRecenteringData()
+        {
+            stateMachine.ReusableData.SidewaysCameraRecenteringData = groundedData.SidewaysCameraRecenteringData;
+            stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
+        }
+
+        protected void SetBaseRotationData()
+        {
+            stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
+
+            stateMachine.ReusableData.TimeToReachTargetRotation = stateMachine.ReusableData.RotationData.TargetRotationReachTime;
+        }
+
+        protected void StartAnimation(int animationHash)
+        {
+            stateMachine.Player.Animator.SetBool(animationHash, true);
+        }
+
+        protected void StopAnimation(int animationHash)
+        {
+            stateMachine.Player.Animator.SetBool(animationHash, false);
         }
 
         protected virtual void AddInputActionsCallbacks()
