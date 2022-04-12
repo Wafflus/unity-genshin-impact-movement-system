@@ -22,6 +22,8 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.DashData.SpeedModifier;
 
+            stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
+
             stateMachine.ReusableData.RotationData = groundedData.DashData.RotationData;
 
             Dash();

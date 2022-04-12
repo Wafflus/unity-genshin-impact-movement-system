@@ -8,12 +8,14 @@ namespace GenshinImpactMovementSystem
         protected PlayerMovementStateMachine stateMachine;
 
         protected readonly PlayerGroundedData groundedData;
+        protected readonly PlayerAirborneData airborneData;
 
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
             stateMachine = playerMovementStateMachine;
 
             groundedData = stateMachine.Player.Data.GroundedData;
+            airborneData = stateMachine.Player.Data.AirborneData;
 
             InitializeData();
         }

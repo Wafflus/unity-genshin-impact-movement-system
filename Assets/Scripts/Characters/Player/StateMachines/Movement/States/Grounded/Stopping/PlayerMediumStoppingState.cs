@@ -11,6 +11,8 @@ namespace GenshinImpactMovementSystem
             base.Enter();
 
             stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.MediumDecelerationForce;
+
+            stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.MediumForce;
         }
     }
 }
