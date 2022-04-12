@@ -218,5 +218,5 @@ MonoBehaviour:
       <StrongForce>k__BackingField: {x: 5, y: 5, z: 5}
       <DecelerationForce>k__BackingField: 1.5
     <FallData>k__BackingField:
-      <FallSpeedLimit>k__BackingField: 15
+      <FallSpeedLimit>k__BackingField: 10
       <MinimumDistanceToBeConsideredHardFall>k__BackingField: 3
