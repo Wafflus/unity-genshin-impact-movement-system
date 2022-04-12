@@ -14,7 +14,21 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
 
+            stateMachine.Player.Input.PlayerActions.Movement.Disable();
+
             ResetVelocity();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            stateMachine.Player.Input.PlayerActions.Movement.Enable();
+        }
+
+        public override void OnAnimationExitEvent()
+        {
+            stateMachine.Player.Input.PlayerActions.Movement.Enable();
         }
 
         public override void OnAnimationTransitionEvent()
