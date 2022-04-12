@@ -4,6 +4,8 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerFallingState : PlayerAirborneState
     {
+        private Vector3 playerPositionOnEnter;
+
         public PlayerFallingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
@@ -13,6 +15,8 @@ namespace GenshinImpactMovementSystem
             base.Enter();
 
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
+
+            playerPositionOnEnter = stateMachine.Player.transform.position;
 
             ResetVerticalVelocity();
         }
@@ -40,6 +44,28 @@ namespace GenshinImpactMovementSystem
 
         protected override void ResetSprintState()
         {
+        }
+
+        protected override void OnContactWithGround(Collider collider)
+        {
+            float fallDistance = playerPositionOnEnter.y - stateMachine.Player.transform.position.y;
+
+            if (fallDistance < airborneData.FallData.MinimumDistanceToBeConsideredHardFall)
+            {
+                stateMachine.ChangeState(stateMachine.LightLandingState);
+
+                return;
+            }
+
+            if (stateMachine.ReusableData.ShouldWalk && !stateMachine.ReusableData.ShouldSprint || stateMachine.ReusableData.MovementInput == Vector2.zero)
+            {
+                stateMachine.ChangeState(stateMachine.HardLandingState);
+
+                return;
+            }
+
+            stateMachine.ChangeState(stateMachine.RollingState);
+
         }
     }
 }
