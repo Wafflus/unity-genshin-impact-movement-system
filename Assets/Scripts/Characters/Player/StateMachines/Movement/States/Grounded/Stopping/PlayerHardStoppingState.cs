@@ -12,5 +12,15 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
         }
+
+        protected override void OnMove()
+        {
+            if (stateMachine.ReusableData.ShouldWalk)
+            {
+                return;
+            }
+
+            stateMachine.ChangeState(stateMachine.RunningState);
+        }
     }
 }
