@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace GenshinImpactMovementSystem
 {
     public abstract class StateMachine
@@ -26,6 +28,11 @@ namespace GenshinImpactMovementSystem
         public void PhysicsUpdate()
         {
             currentState?.PhysicsUpdate();
+        }
+
+        public void OnTriggerEnter(Collider collider)
+        {
+            currentState?.OnTriggerEnter(collider);
         }
 
         public void OnAnimationEnterEvent()
