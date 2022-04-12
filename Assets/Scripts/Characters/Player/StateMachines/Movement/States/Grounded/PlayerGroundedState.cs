@@ -76,7 +76,12 @@ namespace GenshinImpactMovementSystem
         {
             float slopeSpeedModifier = groundedData.SlopeSpeedAngles.Evaluate(angle);
 
-            stateMachine.ReusableData.MovementOnSlopesSpeedModifier = slopeSpeedModifier;
+            if (stateMachine.ReusableData.MovementOnSlopesSpeedModifier != slopeSpeedModifier)
+            {
+                stateMachine.ReusableData.MovementOnSlopesSpeedModifier = slopeSpeedModifier;
+
+                UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
+            }
 
             return slopeSpeedModifier;
         }
