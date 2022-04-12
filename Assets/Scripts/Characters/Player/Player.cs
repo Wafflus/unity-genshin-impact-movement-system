@@ -15,6 +15,9 @@ namespace GenshinImpactMovementSystem
         [field: Header("Camera")]
         [field: SerializeField] public PlayerCameraRecenteringUtility CameraRecenteringUtility { get; private set; }
 
+        [field: Header("Animations")]
+        [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
+
         public Rigidbody Rigidbody { get; private set; }
 
         public PlayerInput Input { get; private set; }
@@ -27,6 +30,7 @@ namespace GenshinImpactMovementSystem
         private void Awake()
         {
             CameraRecenteringUtility.Initialize();
+            AnimationData.Initialize();
 
             Rigidbody = GetComponent<Rigidbody>();
 
