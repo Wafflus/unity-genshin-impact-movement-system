@@ -56,9 +56,40 @@ namespace GenshinImpactMovementSystem
             jumpForce.x *= jumpDirection.x;
             jumpForce.z *= jumpDirection.z;
 
+            jumpForce = GetJumpForceOnSlope(jumpForce);
+
             ResetVelocity();
 
             stateMachine.Player.Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+        }
+
+        private Vector3 GetJumpForceOnSlope(Vector3 jumpForce)
+        {
+            Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
+
+            Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
+
+            if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, airborneData.JumpData.JumpToGroundRayDistance, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+            {
+                float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
+
+                if (IsMovingUp())
+                {
+                    float forceModifier = airborneData.JumpData.JumpForceModifierOnSlopeUpwards.Evaluate(groundAngle);
+
+                    jumpForce.x *= forceModifier;
+                    jumpForce.z *= forceModifier;
+                }
+
+                if (IsMovingDown())
+                {
+                    float forceModifier = airborneData.JumpData.JumpForceModifierOnSlopeDownwards.Evaluate(groundAngle);
+
+                    jumpForce.y *= forceModifier;
+                }
+            }
+
+            return jumpForce;
         }
     }
 }
