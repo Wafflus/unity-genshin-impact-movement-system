@@ -12,5 +12,10 @@ namespace GenshinImpactMovementSystem
         {
             return (1 << layer & layerMask) != 0;
         }
+
+        public bool IsGroundLayer(int layer)
+        {
+            return ContainsLayer(GroundLayer, layer);
+        }
     }
 }
