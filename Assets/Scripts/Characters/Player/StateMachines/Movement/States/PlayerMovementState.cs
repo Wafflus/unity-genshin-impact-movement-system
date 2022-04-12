@@ -240,6 +240,16 @@ namespace GenshinImpactMovementSystem
         {
         }
 
+        protected void EnableCameraRecentering(float waitTime = -1f, float recenteringTime = -1f)
+        {
+            stateMachine.Player.CameraRecenteringUtility.EnableRecentering(waitTime, recenteringTime);
+        }
+
+        protected void DisableCameraRecentering()
+        {
+            stateMachine.Player.CameraRecenteringUtility.DisableRecentering();
+        }
+
         protected void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
