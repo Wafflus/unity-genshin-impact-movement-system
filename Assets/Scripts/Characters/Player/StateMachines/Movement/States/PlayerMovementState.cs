@@ -223,6 +223,10 @@ namespace GenshinImpactMovementSystem
             return new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
         }
 
+        protected virtual void OnContactWithGround()
+        {
+        }
+
         protected void ResetVelocity()
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
@@ -244,8 +248,14 @@ namespace GenshinImpactMovementSystem
             return playerHorizontalMovement.magnitude > minimumMagnitude;
         }
 
-        protected virtual void OnContactWithGround()
+        protected bool IsMovingUp(float minimumVelocity = 0.1f)
         {
+            return GetPlayerVerticalVelocity().y > minimumVelocity;
+        }
+
+        protected bool IsMovingDown(float minimumVelocity = 0.1f)
+        {
+            return GetPlayerVerticalVelocity().y < -minimumVelocity;
         }
     }
 }
