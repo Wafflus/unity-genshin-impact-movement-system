@@ -179,7 +179,7 @@ namespace GenshinImpactMovementSystem
         {
             base.OnMovementPerformed(context);
 
-            UpdateTargetRotation(stateMachine.ReusableData.MovementInput);
+            UpdateTargetRotation(GetMovementInputDirection());
         }
     }
 }

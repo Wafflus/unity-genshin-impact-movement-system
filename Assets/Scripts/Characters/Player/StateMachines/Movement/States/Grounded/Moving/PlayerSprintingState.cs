@@ -27,6 +27,11 @@ namespace GenshinImpactMovementSystem
             startTime = Time.time;
 
             shouldResetSprintState = true;
+
+            if (!stateMachine.ReusableData.ShouldSprint)
+            {
+                keepSprinting = false;
+            }
         }
 
         public override void Exit()
