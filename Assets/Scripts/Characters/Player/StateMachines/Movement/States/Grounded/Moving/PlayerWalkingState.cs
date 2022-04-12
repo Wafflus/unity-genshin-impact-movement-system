@@ -27,6 +27,8 @@ namespace GenshinImpactMovementSystem
         protected override void OnMovementCanceled(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.LightStoppingState);
+
+            base.OnMovementCanceled(context);
         }
     }
 }

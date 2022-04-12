@@ -52,9 +52,5 @@ namespace GenshinImpactMovementSystem
         {
             OnMove();
         }
-
-        protected override void OnMovementCanceled(InputAction.CallbackContext context)
-        {
-        }
     }
 }

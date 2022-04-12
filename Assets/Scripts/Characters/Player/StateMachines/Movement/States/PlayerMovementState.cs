@@ -124,7 +124,7 @@ namespace GenshinImpactMovementSystem
             UpdateCameraRecenteringState(context.ReadValue<Vector2>());
         }
 
-        private void OnMovementCanceled(InputAction.CallbackContext context)
+        protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
         {
             DisableCameraRecentering();
         }

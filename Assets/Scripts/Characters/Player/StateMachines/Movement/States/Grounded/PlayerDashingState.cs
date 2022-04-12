@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -126,10 +125,6 @@ namespace GenshinImpactMovementSystem
         private bool IsConsecutive()
         {
             return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
-        }
-
-        protected override void OnMovementCanceled(InputAction.CallbackContext context)
-        {
         }
 
         protected override void OnDashStarted(InputAction.CallbackContext context)
