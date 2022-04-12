@@ -5,5 +5,10 @@ namespace GenshinImpactMovementSystem
         public PlayerAirborneState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
+
+        protected override void OnContactWithGround()
+        {
+            stateMachine.ChangeState(stateMachine.IdlingState);
+        }
     }
 }

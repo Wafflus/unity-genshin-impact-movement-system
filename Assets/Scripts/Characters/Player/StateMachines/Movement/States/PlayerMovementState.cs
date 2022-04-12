@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,6 +59,12 @@ namespace GenshinImpactMovementSystem
 
         public virtual void OnTriggerEnter(Collider collider)
         {
+            if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
+            {
+                OnContactWithGround();
+
+                return;
+            }
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -235,6 +242,10 @@ namespace GenshinImpactMovementSystem
             Vector2 playerHorizontalMovement = new Vector2(playerHorizontaVelocity.x, playerHorizontaVelocity.z);
 
             return playerHorizontalMovement.magnitude > minimumMagnitude;
+        }
+
+        protected virtual void OnContactWithGround()
+        {
         }
     }
 }
