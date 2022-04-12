@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace GenshinImpactMovementSystem
 {
     public class PlayerAirborneState : PlayerMovementState
@@ -18,7 +20,7 @@ namespace GenshinImpactMovementSystem
             stateMachine.ReusableData.ShouldSprint = false;
         }
 
-        protected override void OnContactWithGround()
+        protected override void OnContactWithGround(Collider collider)
         {
             stateMachine.ChangeState(stateMachine.IdlingState);
         }
