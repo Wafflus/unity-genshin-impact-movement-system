@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
 {
@@ -27,6 +28,22 @@ namespace GenshinImpactMovementSystem
             }
 
             RotateTowardsTargetRotation();
+        }
+
+        public override void OnAnimationTransitionEvent()
+        {
+            if (stateMachine.ReusableData.MovementInput == Vector2.zero)
+            {
+                stateMachine.ChangeState(stateMachine.MediumStoppingState);
+
+                return;
+            }
+
+            OnMove();
+        }
+
+        protected override void OnJumpStarted(InputAction.CallbackContext context)
+        {
         }
     }
 }
