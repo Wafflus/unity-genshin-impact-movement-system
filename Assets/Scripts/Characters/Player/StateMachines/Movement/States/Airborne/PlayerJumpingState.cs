@@ -4,6 +4,8 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerJumpingState : PlayerAirborneState
     {
+        private bool shouldKeepRotating;
+
         public PlayerJumpingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
@@ -14,17 +16,45 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
 
+            stateMachine.ReusableData.RotationData = airborneData.JumpData.RotationData;
+
+            shouldKeepRotating = stateMachine.ReusableData.MovementInput != Vector2.zero;
+
             Jump();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            SetBaseRotationData();
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+
+            if (shouldKeepRotating)
+            {
+                RotateTowardsTargetRotation();
+            }
         }
 
         private void Jump()
         {
             Vector3 jumpForce = stateMachine.ReusableData.CurrentJumpForce;
 
-            Vector3 playerForward = stateMachine.Player.transform.forward;
+            Vector3 jumpDirection = stateMachine.Player.transform.forward;
 
-            jumpForce.x *= playerForward.x;
-            jumpForce.z *= playerForward.z;
+            if (shouldKeepRotating)
+            {
+                UpdateTargetRotation(GetMovementInputDirection());
+
+                jumpDirection = GetTargetRotationDirection(stateMachine.ReusableData.CurrentTargetRotation.y);
+            }
+
+            jumpForce.x *= jumpDirection.x;
+            jumpForce.z *= jumpDirection.z;
 
             ResetVelocity();
 
