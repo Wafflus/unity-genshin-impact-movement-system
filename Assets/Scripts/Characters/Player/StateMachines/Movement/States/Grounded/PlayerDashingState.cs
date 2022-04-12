@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,8 @@ namespace GenshinImpactMovementSystem
 
         private int consecutiveDashesUsed;
 
+        private bool shouldKeepRotating;
+
         public PlayerDashingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
@@ -19,11 +22,34 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.DashData.SpeedModifier;
 
+            stateMachine.ReusableData.RotationData = groundedData.DashData.RotationData;
+
             Dash();
+
+            shouldKeepRotating = stateMachine.ReusableData.MovementInput != Vector2.zero;
 
             UpdateConsecutiveDashes();
 
             startTime = Time.time;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            SetBaseRotationData();
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+
+            if (!shouldKeepRotating)
+            {
+                return;
+            }
+
+            RotateTowardsTargetRotation();
         }
 
         public override void OnAnimationTransitionEvent()
@@ -38,14 +64,38 @@ namespace GenshinImpactMovementSystem
             stateMachine.ChangeState(stateMachine.SprintingState);
         }
 
+        protected override void AddInputActionsCallbacks()
+        {
+            base.AddInputActionsCallbacks();
+
+            stateMachine.Player.Input.PlayerActions.Movement.performed += OnMovementPerformed;
+
+        }
+
+        protected override void RemoveInputActionsCallbacks()
+        {
+            base.RemoveInputActionsCallbacks();
+
+            stateMachine.Player.Input.PlayerActions.Movement.performed -= OnMovementPerformed;
+        }
+
+        private void OnMovementPerformed(InputAction.CallbackContext context)
+        {
+            shouldKeepRotating = true;
+        }
+
         private void Dash()
         {
             Vector3 dashDirection = stateMachine.Player.transform.forward;
 
             dashDirection.y = 0f;
 
+            UpdateTargetRotation(dashDirection, false);
+
             if (stateMachine.ReusableData.MovementInput != Vector2.zero)
             {
+                UpdateTargetRotation(GetMovementInputDirection());
+
                 dashDirection = GetTargetRotationDirection(stateMachine.ReusableData.CurrentTargetRotation.y);
             }
 

@@ -20,7 +20,14 @@ namespace GenshinImpactMovementSystem
 
         private void InitializeData()
         {
-            stateMachine.ReusableData.TimeToReachTargetRotation = groundedData.BaseRotationData.TargetRotationReachTime;
+            SetBaseRotationData();
+        }
+
+        protected void SetBaseRotationData()
+        {
+            stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
+
+            stateMachine.ReusableData.TimeToReachTargetRotation = stateMachine.ReusableData.RotationData.TargetRotationReachTime;
         }
 
         public virtual void Enter()
