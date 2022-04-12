@@ -16,6 +16,8 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.ReusableData.MovementSpeedModifier = 0f;
 
+            stateMachine.ReusableData.MovementDecelerationForce = airborneData.JumpData.DecelerationForce;
+
             stateMachine.ReusableData.RotationData = airborneData.JumpData.RotationData;
 
             shouldKeepRotating = stateMachine.ReusableData.MovementInput != Vector2.zero;
@@ -37,6 +39,11 @@ namespace GenshinImpactMovementSystem
             if (shouldKeepRotating)
             {
                 RotateTowardsTargetRotation();
+            }
+
+            if (IsMovingUp())
+            {
+                DecelerateVertically();
             }
         }
 
