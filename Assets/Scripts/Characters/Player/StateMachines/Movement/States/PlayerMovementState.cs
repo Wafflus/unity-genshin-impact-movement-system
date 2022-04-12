@@ -207,5 +207,12 @@ namespace GenshinImpactMovementSystem
         {
             stateMachine.Player.Rigidbody.velocity = Vector3.zero;
         }
+
+        protected void DecelerateHorizontally()
+        {
+            Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
+
+            stateMachine.Player.Rigidbody.AddForce(-playerHorizontalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
+        }
     }
 }
