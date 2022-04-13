@@ -1,0 +1,240 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "bfb2e605-c41a-42b3-b2ee-4a4282bcf096",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "865a57fe-2a1d-48b5-92f1-26cc1d51e076",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "WalkToggle",
+                    "type": "Button",
+                    "id": "59e112e7-6b2f-4a71-ab28-33fbecdb017e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "01e2fa9d-3ceb-4750-8a94-8645aebbc805",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "9116f69e-006a-4e67-8e2d-6d303a3edf36",
+                    "expectedControlType": "Axis",
+                    "processors": "Clamp(min=-0.1,max=0.1),Invert",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "3a08fe1b-9bf9-4d09-b4c2-6df4d4fa3fff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "83217935-c13c-40c6-84f8-f8965a93ea16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "42d840d2-9d21-44e7-992a-8d5a10e30132",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CursorToggle",
+                    "type": "Button",
+                    "id": "e2ac7a91-4e51-40b5-bfe4-735e5216687f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1583288a-0fd1-4a29-84fa-b96d48a47e24",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WalkToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "d30332b1-6b77-494f-b49b-904ead9834d6",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "439bd5dc-3251-4e14-844b-e200bc9e3a6b",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "46a286e0-5325-40ba-b533-6daab64797e4",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d0566cf0-1939-4b69-932a-ead158e903c1",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "29913e94-0fb6-40bb-b231-1b81794f8751",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9043b894-bb7e-4cbf-a7b6-4d046c01d04e",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d95d9147-5376-488f-8e14-646a1e6fbfd0",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71c1f680-d733-447c-b2ee-a095148f37b8",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf8eb5b9-3f0a-4403-9480-e6090982ca30",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e48a1db-a15b-4594-9ec8-70f826bbc421",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0de007e-23c3-4d2f-b333-24d953a5ecf3",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef7c923b-bc76-4e1f-816b-2a555e093e49",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7476a130-e887-4a70-8ece-5094a7605971",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
